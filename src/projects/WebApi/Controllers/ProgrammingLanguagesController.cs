@@ -1,7 +1,9 @@
-﻿using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguageById;
+﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgramminLanguage;
+using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguageById;
 using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguages;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
+
 namespace WebApi.Controllers;
 
 [Route("api/[controller]")]
@@ -15,4 +17,8 @@ public class ProgrammingLanguagesController : BaseController
     [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync(int id)
         => Ok(await Mediator.Send(new GetProgrammingLanguageByIdQuery { Id = id }));
+
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync([FromBody] CreateProgrammingLanguageCommand programmingLanguage)
+        => Ok(await Mediator.Send(programmingLanguage));
 }

@@ -1,4 +1,5 @@
-﻿using Application.Features.ProgrammingLanguages.Dtos;
+﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgramminLanguage;
+using Application.Features.ProgrammingLanguages.Dtos;
 using Application.Features.ProgrammingLanguages.Models;
 using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguageById;
 using Core.Persistence.Paging;
@@ -14,5 +15,9 @@ public class MappingProfile : Profile
 
         //GetProgrammingLanguageById
         CreateMap<ProgrammingLanguage, GetProgrammingLanguageByIdDto>();
+
+        //CreateProgrammingLanguage
+        CreateMap<CreateProgrammingLanguageCommandRequestDto, ProgrammingLanguage>();
+        CreateMap<ProgrammingLanguage, CreateProgrammingLanguageCommandResponseDto>();
     }
 }
