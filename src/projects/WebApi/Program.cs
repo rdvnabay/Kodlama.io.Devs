@@ -1,4 +1,5 @@
 using Application;
+using Core.CrossCuttingConcers.Extensions;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.ConfigureCustomExceptionMiddleware();
 }
 
 app.UseAuthorization();
