@@ -1,4 +1,5 @@
 ﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgramminLanguage;
+using Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguageById;
 using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguages;
 using Core.Application.Requests;
@@ -20,5 +21,9 @@ public class ProgrammingLanguagesController : BaseController
 
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] CreateProgrammingLanguageCommand programmingLanguage)
+        => Ok(await Mediator.Send(programmingLanguage));
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateAsync([FromBody] UpdateProgrammingLanguageCommand programmingLanguage)
         => Ok(await Mediator.Send(programmingLanguage));
 }

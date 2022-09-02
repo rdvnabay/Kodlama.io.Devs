@@ -1,4 +1,5 @@
 ﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgramminLanguage;
+using Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Dtos;
 using Application.Features.ProgrammingLanguages.Models;
 using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguageById;
@@ -19,5 +20,8 @@ public class MappingProfile : Profile
         //CreateProgrammingLanguage
         CreateMap<CreateProgrammingLanguageCommandRequestDto, ProgrammingLanguage>();
         CreateMap<ProgrammingLanguage, CreateProgrammingLanguageCommandResponseDto>();
+
+        //UpdateProgrammingLanguage
+        CreateMap<ProgrammingLanguage, UpdateProgrammingLanguageCommandDto>().ReverseMap();
     }
 }
