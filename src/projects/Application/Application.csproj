@@ -18,7 +18,7 @@
 	<ItemGroup>
 		<Using Include="Core.Persistence.Repositories" />
 		<Using Include="Domain.Entities" />
-		<Using Include="AutoMapper"/>
+		<Using Include="AutoMapper" />
 		<Using Include="MediatR" />
 	</ItemGroup>
 
