@@ -1,7 +1,7 @@
 ﻿using Application.Services.Repositories;
 using Core.CrossCuttingConcers.Exceptions;
 
-namespace Application.Features.ProgrammingLanguages.Rules;
+namespace Application.Features.ProgrammingLanguages;
 public class ProgrammingLanguageBusinessRules
 {
     private readonly IProgrammingLanguageRepository _programmingLanguageRepository;

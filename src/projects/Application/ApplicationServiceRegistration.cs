@@ -1,4 +1,4 @@
-﻿using Application.Features.ProgrammingLanguages.Rules;
+﻿using Application.Features.ProgrammingLanguages;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;

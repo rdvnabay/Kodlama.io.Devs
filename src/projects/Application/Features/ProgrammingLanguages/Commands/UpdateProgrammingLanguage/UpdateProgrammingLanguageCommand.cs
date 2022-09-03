@@ -1,5 +1,4 @@
-﻿using Application.Features.ProgrammingLanguages.Rules;
-using Application.Services.Repositories;
+﻿using Application.Services.Repositories;
 
 namespace Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 public class UpdateProgrammingLanguageCommand : IRequest<UpdateProgrammingLanguageCommandDto>

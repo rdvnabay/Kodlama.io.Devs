@@ -1,18 +1,17 @@
 ﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgramminLanguage;
 using Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
-using Application.Features.ProgrammingLanguages.Dtos;
-using Application.Features.ProgrammingLanguages.Models;
 using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguageById;
+using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguages;
 using Core.Persistence.Paging;
 
-namespace Application.Features.ProgrammingLanguages.Mappings;
+namespace Application.Features.ProgrammingLanguages;
 public class MappingProfile : Profile
 {
     public MappingProfile()
     {
         //GetProgrammingLanguages
-        CreateMap<IPaginate<ProgrammingLanguage>, ProgrammingLanguagesModel>();
-        CreateMap<ProgrammingLanguage, ProgrammingLanguagesDto>();
+        CreateMap<IPaginate<ProgrammingLanguage>, GetProgrammingLanguagesModel>();
+        CreateMap<ProgrammingLanguage, GetProgrammingLanguagesDto>();
 
         //GetProgrammingLanguageById
         CreateMap<ProgrammingLanguage, GetProgrammingLanguageByIdDto>();
