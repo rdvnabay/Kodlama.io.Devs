@@ -22,9 +22,11 @@ public class UpdateProgrammingLanguageCommand : IRequest<UpdateProgrammingLangua
 
         public async Task<UpdateProgrammingLanguageCommandDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
         {
-            await _rules.ProgramingLanguageNameCanNotBeDuplicated(request.ProgrammingLanguage.Name);
-
             var programmingLanguage = await _programmingLanguageRepository.GetAsync(pl => pl.Id == request.ProgrammingLanguage.Id);
+
+            if (programmingLanguage.Name != request.ProgrammingLanguage.Name)
+                await _rules.ProgramingLanguageNameCanNotBeDuplicated(request.ProgrammingLanguage.Name);
+
             var mappedProgrammingLanguage = _mapper.Map(request.ProgrammingLanguage, programmingLanguage);
             await _programmingLanguageRepository.UpdateAsync(mappedProgrammingLanguage);
 

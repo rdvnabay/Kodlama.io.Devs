@@ -13,7 +13,7 @@ public class ProgrammingLanguageBusinessRules
 
     public async Task ProgramingLanguageNameCanNotBeDuplicated(string name)
     {
-        var programmingLanguage = await _programmingLanguageRepository.GetAsync(pl => pl.Name == name);
-        if (programmingLanguage is not null) throw new BusinessException("Programming language exists");
+        var recordExists = await _programmingLanguageRepository.AnyAsync(pl => pl.Name == name);
+        if (recordExists) throw new BusinessException("Programming language exists");
     }
 }
