@@ -20,8 +20,8 @@ public class EfRepositoryBase<TContext, TEntity> : IAsyncRepository<TEntity>
         return await queryable.ToPaginateAsync(index, size, 0, cancellationToken);
     }
 
-    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
-        => await Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> query)
+        => await Context.Set<TEntity>().FirstOrDefaultAsync(query);
 
     public async Task<TEntity> AddAsync(TEntity entity)
     {
@@ -42,4 +42,7 @@ public class EfRepositoryBase<TContext, TEntity> : IAsyncRepository<TEntity>
         await Context.SaveChangesAsync();
         return entity;
     }
+
+    public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> query)
+        => await Context.Set<TEntity>().AnyAsync(query);
 }
