@@ -15,4 +15,6 @@ public class TechnologyBusinessRules
         var recordExists = await _technologyRepository.AnyAsync(t => t.Name == name);
         if (recordExists) throw new BusinessException("Technology name exists");
     }
+
+    public void NullCheck(Technology technology) => ArgumentNullException.ThrowIfNull(technology);
 }

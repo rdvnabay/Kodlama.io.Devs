@@ -1,6 +1,7 @@
 ﻿using Application.Features.Technologies.Commands.CreateTechnology;
-
+using Application.Features.Technologies.Commands.UpdateTechnology;
 namespace Application.Features.Technologies;
+
 public partial class MappingProfile:Profile
 {
     public MappingProfile()
@@ -8,5 +9,9 @@ public partial class MappingProfile:Profile
         //CreateTechnology
         CreateMap<CreateTechnologyCommandRequestDto, Technology>();
         CreateMap<Technology, CreateTechnologyCommandResponseDto>();
+
+        //UpdateTechnology
+        CreateMap<UpdateTechnologyCommandRequestDto, Technology>();
+        CreateMap<Technology, UpdateTechnologyCommandResponseDto>();
     }
 }
