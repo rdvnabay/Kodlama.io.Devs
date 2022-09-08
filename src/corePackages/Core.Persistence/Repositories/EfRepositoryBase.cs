@@ -1,6 +1,7 @@
 ﻿using Core.Domain.Entities;
 using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
 namespace Core.Persistence.Repositories;
@@ -14,9 +15,14 @@ public class EfRepositoryBase<TContext, TEntity> : IAsyncRepository<TEntity>
         Context = context;
     }
 
-    public async Task<IPaginate<TEntity>> GetListAsync(int index = 0, int size = 10, CancellationToken cancellationToken = default)
+    public async Task<IPaginate<TEntity>> GetListAsync(
+        int index = 0, int size = 10,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+        CancellationToken cancellationToken = default)
     {
         IQueryable<TEntity> queryable = Context.Set<TEntity>();
+        if (include != null) queryable = include(queryable);
+
         return await queryable.ToPaginateAsync(index, size, 0, cancellationToken);
     }
 
