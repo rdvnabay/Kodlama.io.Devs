@@ -7,4 +7,5 @@ public class ApplicationDbContext : DbContext
 
 
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+    public DbSet<Technology> Technologies { get; set; }
 }
