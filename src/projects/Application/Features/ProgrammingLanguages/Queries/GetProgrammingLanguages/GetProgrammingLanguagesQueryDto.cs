@@ -1,6 +1,6 @@
 ﻿namespace Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguages;
 
-public class GetProgrammingLanguagesDto
+public class GetProgrammingLanguagesQueryDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
