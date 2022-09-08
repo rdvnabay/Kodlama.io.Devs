@@ -1,10 +1,10 @@
 ﻿using Application.Features.ProgrammingLanguages;
+using Application.Features.Technologies;
 using Core.Application.Pipelines.Validation;
-using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-
 namespace Application;
+
 public static class ApplicationServiceRegistration
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
@@ -13,8 +13,11 @@ public static class ApplicationServiceRegistration
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
+        //Business Rules
         services.AddScoped<ProgrammingLanguageBusinessRules>();
+        services.AddScoped<TechnologyBusinessRules>();
 
+        //Behaviors
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
         return services;
