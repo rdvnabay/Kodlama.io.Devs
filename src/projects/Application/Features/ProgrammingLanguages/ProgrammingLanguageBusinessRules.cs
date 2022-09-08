@@ -1,7 +1,6 @@
 ﻿using Application.Services.Repositories;
-using Core.CrossCuttingConcers.Exceptions;
-
 namespace Application.Features.ProgrammingLanguages;
+
 public class ProgrammingLanguageBusinessRules
 {
     private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
@@ -16,4 +15,6 @@ public class ProgrammingLanguageBusinessRules
         var recordExists = await _programmingLanguageRepository.AnyAsync(pl => pl.Name == name);
         if (recordExists) throw new BusinessException("Programming language exists");
     }
+
+    public void NullCheck(ProgrammingLanguage programmingLanguage) => ArgumentNullException.ThrowIfNull(programmingLanguage);
 }

@@ -18,6 +18,7 @@
 	<!-- Global Usings -->
 	<ItemGroup>
 		<Using Include="Core.Persistence.Repositories" />
+		<Using Include="Core.CrossCuttingConcers.Exceptions" />
 		<Using Include="Domain.Entities" />
 		<Using Include="AutoMapper" />
 		<Using Include="FluentValidation" />
@@ -32,5 +33,5 @@
 		<PackageReference Include="MediatR" Version="10.0.1" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
 	</ItemGroup>
-
+	
 </Project>

@@ -5,7 +5,7 @@ using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguages;
 using Core.Persistence.Paging;
 
 namespace Application.Features.ProgrammingLanguages;
-public class MappingProfile : Profile
+public partial class MappingProfile : Profile
 {
     public MappingProfile()
     {
