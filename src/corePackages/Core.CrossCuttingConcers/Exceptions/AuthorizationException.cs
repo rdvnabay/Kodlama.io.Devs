@@ -2,9 +2,12 @@
 using System.Text.Json;
 namespace Core.CrossCuttingConcers.Exceptions;
 
-public class ValidationProblemDetails : ProblemDetails
+public class AuthorizationException : Exception
 {
-    public object Errors { get; set; }
+    public AuthorizationException(string message) : base(message) { }
+}
 
+public class AuthorizationProblemDetails : ProblemDetails
+{
     public override string ToString() => JsonSerializer.Serialize(this);
 }

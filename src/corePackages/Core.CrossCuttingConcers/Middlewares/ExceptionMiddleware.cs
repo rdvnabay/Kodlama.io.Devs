@@ -3,7 +3,6 @@ using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-
 namespace Core.CrossCuttingConcers.Middlewares;
 
 public class ExceptionMiddleware
@@ -31,10 +30,39 @@ public class ExceptionMiddleware
     {
         context.Response.ContentType = "application/json";
 
-        if (exception.GetType() == typeof(ValidationException)) return CreateValidationException(context, exception);
+        if (exception.GetType() == typeof(AuthorizationException)) return CreateAuthorizationException(context, exception);
         if (exception.GetType() == typeof(BusinessException)) return CreateBusinessException(context, exception);
-
+        if (exception.GetType() == typeof(ValidationException)) return CreateValidationException(context, exception);
+       
         return CreateInternalException(context, exception);
+    }
+
+    private Task CreateAuthorizationException(HttpContext context, Exception exception)
+    {
+        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.Unauthorized);
+
+        return context.Response.WriteAsync(new AuthorizationProblemDetails
+        {
+            Status = StatusCodes.Status401Unauthorized,
+            Type = "https://example.com/probs/authorization",
+            Title = "Authorization exception",
+            Detail = exception.Message,
+            Instance = ""
+        }.ToString());
+    }
+
+    private Task CreateBusinessException(HttpContext context, Exception exception)
+    {
+        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
+
+        return context.Response.WriteAsync(new BusinessProblemDetails
+        {
+            Status = StatusCodes.Status400BadRequest,
+            Type = "https://example.com/probs/business",
+            Title = "Business exception",
+            Detail = exception.Message,
+            Instance = ""
+        }.ToString());
     }
 
     private Task CreateValidationException(HttpContext context, Exception exception)
@@ -50,20 +78,6 @@ public class ExceptionMiddleware
             Detail = "",
             Instance = "",
             Errors = errors
-        }.ToString());
-    }
-
-    private Task CreateBusinessException(HttpContext context, Exception exception)
-    {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
-
-        return context.Response.WriteAsync(new BusinessProblemDetails
-        {
-            Status = StatusCodes.Status400BadRequest,
-            Type = "https://example.com/probs/business",
-            Title = "Business exception",
-            Detail = exception.Message,
-            Instance = ""
         }.ToString());
     }
 
