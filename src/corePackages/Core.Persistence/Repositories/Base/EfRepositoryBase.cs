@@ -1,10 +1,10 @@
-﻿using Core.Domain.Entities;
+﻿using Core.Domain.Entities.Base;
 using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
-namespace Core.Persistence.Repositories;
+namespace Core.Persistence.Repositories.Base;
 public class EfRepositoryBase<TContext, TEntity> : IAsyncRepository<TEntity>
     where TContext : DbContext
     where TEntity : class, IEntity
