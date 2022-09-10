@@ -12,6 +12,7 @@
 		<ProjectReference Include="..\..\corePackages\Core.Application\Core.Application.csproj" />
 		<ProjectReference Include="..\..\corePackages\Core.CrossCuttingConcers\Core.CrossCuttingConcers.csproj" />
 		<ProjectReference Include="..\..\corePackages\Core.Persistence\Core.Persistence.csproj" />
+		<ProjectReference Include="..\..\corePackages\Core.Security\Core.Security.csproj" />
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
 
@@ -32,6 +33,9 @@
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.1" />
 		<PackageReference Include="MediatR" Version="10.0.1" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Features\Users\Queries\" />
 	</ItemGroup>
 	
 </Project>

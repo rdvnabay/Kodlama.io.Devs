@@ -1,5 +1,6 @@
 ﻿using Application.Features.ProgrammingLanguages;
 using Application.Features.Technologies;
+using Application.Features.Users;
 using Core.Application.Pipelines.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -14,6 +15,7 @@ public static class ApplicationServiceRegistration
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         //Business Rules
+        services.AddScoped<UserBusinessRules>();
         services.AddScoped<ProgrammingLanguageBusinessRules>();
         services.AddScoped<TechnologyBusinessRules>();
 
