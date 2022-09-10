@@ -1,17 +1,35 @@
-﻿using Core.Persistence.Contexts;
+﻿using Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 namespace Persistence.Contexts;
 
-public sealed class ApplicationDbContext : ProjectDbContext
+public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration) : base(options,configuration){ }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration) : base(options)
+    {
+        Configuration = configuration;
+    }
 
+    protected IConfiguration Configuration { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
+    //DbSets
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
     public DbSet<Technology> Technologies { get; set; }
+
+    public DbSet<User> User { get; set; }
+    public DbSet<OperationClaim> OperationClaims { get; set; }
+    public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+            base.OnConfiguring(optionsBuilder
+                .UseSqlServer(Configuration.GetConnectionString("KodlamaIO"))
+                .EnableSensitiveDataLogging());      
+    }
 }
