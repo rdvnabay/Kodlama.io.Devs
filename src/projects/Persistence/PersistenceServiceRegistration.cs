@@ -1,5 +1,4 @@
-﻿using Application.Services.Repositories;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Persistence.Repositories;
 namespace Persistence;
 
@@ -12,6 +11,8 @@ public static class PersistenceServiceRegistration
         //Repositories
         services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguageRepository>();
         services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+
+        services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
