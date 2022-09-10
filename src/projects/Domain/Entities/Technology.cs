@@ -1,4 +1,5 @@
-﻿using Core.Domain.Entities;
+﻿using Core.Domain.Entities.Base;
+
 namespace Domain.Entities;
 
 public class Technology:Entity<int>
