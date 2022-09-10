@@ -18,7 +18,8 @@
 
 	<!-- Global Usings -->
 	<ItemGroup>
-		<Using Include="Core.Persistence.Repositories" />
+		<Using Include="Core.Domain.Entities"/>
+		<Using Include="Core.Persistence.Repositories.Base"/>
 		<Using Include="Core.CrossCuttingConcers.Exceptions" />
 		<Using Include="Domain.Entities" />
 		<Using Include="AutoMapper" />
@@ -33,9 +34,6 @@
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.1" />
 		<PackageReference Include="MediatR" Version="10.0.1" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Features\Users\Queries\" />
 	</ItemGroup>
 	
 </Project>
