@@ -1,15 +1,20 @@
 using Application;
 using Core.CrossCuttingConcers.Extensions;
 using Persistence;
+using WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddSwaggerGen(options =>
+{
+    options.OrderActionsBy((apiDesc) => $"{apiDesc.ActionDescriptor.RouteValues["controller"]}_{apiDesc.HttpMethod}");
+});
+builder.Services.AddPersistenceServices();
 builder.Services.AddApplicationServices();
+builder.Services.AddJwtBearer(builder.Configuration);
 
 var app = builder.Build();
 
@@ -24,3 +29,5 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
+
