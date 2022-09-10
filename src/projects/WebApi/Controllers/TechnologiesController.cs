@@ -4,6 +4,8 @@ using Application.Features.Technologies.Commands.UpdateTechnology;
 using Application.Features.Technologies.Queries.GetTechnologies;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Controllers.Base;
+
 namespace WebApi.Controllers;
 
 [Route("api/[controller]")]
