@@ -6,13 +6,15 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
+
+	<!-- Packages -->
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  </PackageReference>
-	  <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<!-- Project References -->
@@ -24,9 +26,11 @@
 
 	<!-- Global Usings -->
 	<ItemGroup>
-		<Using Include="Core.Persistence.Repositories" />
+		<Using Include="Core.Persistence.Repositories.Base"/>
+		<Using Include="Core.Domain.Entities"/>
 		<Using Include="Domain.Entities" />
 		<Using Include="Persistence.Contexts" />
+		<Using Include="Application.Services.Repositories"/>
 	</ItemGroup>
 
 </Project>

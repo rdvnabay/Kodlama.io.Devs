@@ -1,6 +1,4 @@
-﻿using Application.Services.Repositories;
-using Core.Persistence.Repositories.Base;
-namespace Persistence.Repositories;
+﻿namespace Persistence.Repositories;
 
 public class TechnologyRepository : EfRepositoryBase<ApplicationDbContext, Technology>, ITechnologyRepository
 {
