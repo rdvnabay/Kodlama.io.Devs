@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+using Newtonsoft.Json;
 namespace Core.CrossCuttingConcers.Exceptions;
 
 public class ValidationProblemDetails : ProblemDetails
 {
     public object Errors { get; set; }
 
-    public override string ToString() => JsonSerializer.Serialize(this);
+    public override string ToString() => JsonConvert.SerializeObject(this);
 }

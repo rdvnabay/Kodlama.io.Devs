@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Net;
 namespace Core.CrossCuttingConcers.Middlewares;
 
@@ -33,7 +34,7 @@ public class ExceptionMiddleware
         if (exception.GetType() == typeof(AuthorizationException)) return CreateAuthorizationException(context, exception);
         if (exception.GetType() == typeof(BusinessException)) return CreateBusinessException(context, exception);
         if (exception.GetType() == typeof(ValidationException)) return CreateValidationException(context, exception);
-       
+
         return CreateInternalException(context, exception);
     }
 
@@ -85,13 +86,14 @@ public class ExceptionMiddleware
     {
         context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError);
 
-        return context.Response.WriteAsync(new ProblemDetails
-        {
-            Status = StatusCodes.Status500InternalServerError,
-            Type = "https://example.com/probs/internal",
-            Title = "Internal exception",
-            Detail = exception.Message,
-            Instance = ""
-        }.ToString());
+        return context.Response.WriteAsync(
+            JsonConvert.SerializeObject(new ProblemDetails
+            {
+                Status = StatusCodes.Status500InternalServerError,
+                Type = "https://example.com/probs/internal",
+                Title = "Internal exception",
+                Detail = exception.Message,
+                Instance = ""
+            }));
     }
 }
