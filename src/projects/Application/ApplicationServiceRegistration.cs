@@ -1,6 +1,7 @@
 ﻿using Application.Features.ProgrammingLanguages;
 using Application.Features.Technologies;
 using Application.Features.Users;
+using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -20,6 +21,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<TechnologyBusinessRules>();
 
         //Behaviors
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
         return services;
