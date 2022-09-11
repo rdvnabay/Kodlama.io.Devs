@@ -9,6 +9,7 @@
 
 	<!-- Packages -->
 	<ItemGroup>
+		<PackageReference Include="Bogus" Version="34.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8">
@@ -26,11 +27,14 @@
 
 	<!-- Global Usings -->
 	<ItemGroup>
-		<Using Include="Core.Persistence.Repositories.Base"/>
-		<Using Include="Core.Domain.Entities"/>
+		<Using Include="Core.Persistence.Repositories.Base" />
+		<Using Include="Core.Domain.Entities" />
 		<Using Include="Domain.Entities" />
 		<Using Include="Persistence.Contexts" />
-		<Using Include="Application.Services.Repositories"/>
+		<Using Include="Application.Services.Repositories" />
+		<Using Include="Microsoft.EntityFrameworkCore"/>
+		<Using Include="Microsoft.EntityFrameworkCore.Metadata.Builders"/>
+		<Using Include="Bogus"/>
 	</ItemGroup>
 
 </Project>
