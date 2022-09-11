@@ -1,7 +1,7 @@
 ﻿using Core.Domain.Entities.Base;
 namespace Core.Domain.Entities;
 
-public class User : Entity
+public partial class User : Entity
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
