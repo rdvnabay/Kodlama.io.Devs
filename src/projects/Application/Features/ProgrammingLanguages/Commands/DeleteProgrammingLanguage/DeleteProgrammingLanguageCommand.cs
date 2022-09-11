@@ -4,27 +4,26 @@ namespace Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLa
 public class DeleteProgrammingLanguageCommand : IRequest<bool>
 {
     public int Id { get; set; }
+}
 
+public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, bool>
+{
+    private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
+    private readonly ProgrammingLanguageBusinessRules _businessRules;
 
-    public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, bool>
+    public DeleteProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, ProgrammingLanguageBusinessRules businessRules)
     {
-        private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
-        private readonly ProgrammingLanguageBusinessRules _rules;
+        _programmingLanguageRepository = programmingLanguageRepository;
+        _businessRules = businessRules;
+    }
 
-        public DeleteProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, ProgrammingLanguageBusinessRules rules)
-        {
-            _programmingLanguageRepository = programmingLanguageRepository;
-            _rules = rules;
-        }
+    public async Task<bool> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
+    {
+        ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(pl => pl.Id == request.Id);
 
-        public async Task<bool> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
-        {
-            ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(pl => pl.Id == request.Id);
+        _businessRules.NullCheck(programmingLanguage);
+        await _programmingLanguageRepository.DeleteAsync(programmingLanguage);
 
-            _rules.NullCheck(programmingLanguage);
-            await _programmingLanguageRepository.DeleteAsync(programmingLanguage);
-
-            return true;
-        }
+        return true;
     }
 }

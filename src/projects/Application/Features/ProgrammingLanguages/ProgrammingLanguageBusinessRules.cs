@@ -1,7 +1,8 @@
 ﻿using Application.Services.Repositories;
+using Core.Application.BusinessRules;
 namespace Application.Features.ProgrammingLanguages;
 
-public class ProgrammingLanguageBusinessRules
+public class ProgrammingLanguageBusinessRules : GlobalBusinessRules
 {
     private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
 
@@ -12,9 +13,7 @@ public class ProgrammingLanguageBusinessRules
 
     public async Task ProgramingLanguageNameCanNotBeDuplicated(string name)
     {
-        var recordExists = await _programmingLanguageRepository.AnyAsync(pl => pl.Name == name);
-        if (recordExists) throw new BusinessException("Programming language exists");
+        if (await _programmingLanguageRepository.AnyAsync(pl => pl.Name == name))
+            throw new BusinessException("Programming language exists");
     }
-
-    public void NullCheck(ProgrammingLanguage programmingLanguage) => ArgumentNullException.ThrowIfNull(programmingLanguage);
 }

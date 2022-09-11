@@ -6,7 +6,6 @@ using Application.Features.ProgrammingLanguages.Queries.GetProgrammingLanguages;
 using Core.Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Base;
-
 namespace WebApi.Controllers;
 
 [Route("api/[controller]")]

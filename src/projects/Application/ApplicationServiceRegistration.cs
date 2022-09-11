@@ -1,4 +1,5 @@
 ﻿using Application.Features.ProgrammingLanguages;
+using Application.Features.SocialMediaAccounts;
 using Application.Features.Technologies;
 using Application.Features.Users;
 using Core.Application.Pipelines.Authorization;
@@ -16,9 +17,10 @@ public static class ApplicationServiceRegistration
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         //Business Rules
-        services.AddScoped<UserBusinessRules>();
         services.AddScoped<ProgrammingLanguageBusinessRules>();
+        services.AddScoped<SocialMediaAccountBusinessRules>();
         services.AddScoped<TechnologyBusinessRules>();
+        services.AddScoped<UserBusinessRules>();
 
         //Behaviors
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));

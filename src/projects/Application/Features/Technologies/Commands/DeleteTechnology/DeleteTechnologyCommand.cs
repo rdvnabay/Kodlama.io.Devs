@@ -4,27 +4,26 @@ namespace Application.Features.Technologies.Commands.DeleteTechnology;
 public class DeleteTechnologyCommand : IRequest<bool>
 {
     public int Id { get; set; }
+}
 
+public class DeleteTechnologyCommandHandler : IRequestHandler<DeleteTechnologyCommand, bool>
+{
+    private readonly ITechnologyRepository _technologyRepository;
+    private readonly TechnologyBusinessRules _businessRules;
 
-    public class DeleteTechnologyCommandHandler : IRequestHandler<DeleteTechnologyCommand, bool>
+    public DeleteTechnologyCommandHandler(ITechnologyRepository technologyRepository, TechnologyBusinessRules businessRules)
     {
-        private readonly ITechnologyRepository _technologyRepository;
-        private readonly TechnologyBusinessRules _rules;
+        _technologyRepository = technologyRepository;
+        _businessRules = businessRules;
+    }
 
-        public DeleteTechnologyCommandHandler(ITechnologyRepository technologyRepository, TechnologyBusinessRules rules)
-        {
-            _technologyRepository = technologyRepository;
-            _rules = rules;
-        }
+    public async Task<bool> Handle(DeleteTechnologyCommand request, CancellationToken cancellationToken)
+    {
+        Technology? technology = await _technologyRepository.GetAsync(t => t.Id == request.Id);
 
-        public async Task<bool> Handle(DeleteTechnologyCommand request, CancellationToken cancellationToken)
-        {
-            Technology? technology = await _technologyRepository.GetAsync(t => t.Id == request.Id);
+        _businessRules.NullCheck(technology);
+        await _technologyRepository.DeleteAsync(technology);
 
-            _rules.NullCheck(technology);
-
-            await _technologyRepository.DeleteAsync(technology);
-            return true;
-        }
+        return true;
     }
 }

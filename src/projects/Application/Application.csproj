@@ -18,8 +18,8 @@
 
 	<!-- Global Usings -->
 	<ItemGroup>
-		<Using Include="Core.Domain.Entities"/>
-		<Using Include="Core.Persistence.Repositories.Base"/>
+		<Using Include="Core.Domain.Entities" />
+		<Using Include="Core.Persistence.Repositories.Base" />
 		<Using Include="Core.CrossCuttingConcers.Exceptions" />
 		<Using Include="Domain.Entities" />
 		<Using Include="AutoMapper" />

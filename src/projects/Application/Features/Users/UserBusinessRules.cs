@@ -1,8 +1,9 @@
 ﻿using Application.Services.Repositories;
+using Core.Application.BusinessRules;
 using Core.Security.Helpers;
 namespace Application.Features.Users;
 
-public class UserBusinessRules
+public class UserBusinessRules:GlobalBusinessRules
 {
     private readonly IUserRepository _userRepository;
 
@@ -20,9 +21,6 @@ public class UserBusinessRules
     public void VerifyPassword(User user, string password)
     {
         if (!HashingHelper.VerifyPasswordHash(password, user.PasswordSalt, user.PasswordHash))
-            throw new AuthorizationException("Password Error");
+            throw new BusinessException("Password Error");
     }
-
-
-    public void NullCheck(User user) => ArgumentNullException.ThrowIfNull(user);
 }

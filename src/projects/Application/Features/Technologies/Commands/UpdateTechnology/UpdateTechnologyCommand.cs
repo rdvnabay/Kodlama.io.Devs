@@ -4,32 +4,31 @@ namespace Application.Features.Technologies.Commands.UpdateTechnology;
 public class UpdateTechnologyCommand : IRequest<UpdateTechnologyCommandResponseDto>
 {
     public UpdateTechnologyCommandRequestDto Technology { get; set; }
+}
 
+public class UpdateTechnologyCommandHandler : IRequestHandler<UpdateTechnologyCommand, UpdateTechnologyCommandResponseDto>
+{
+    private readonly ITechnologyRepository _technologyRepository;
+    private readonly TechnologyBusinessRules _businessRules;
+    private readonly IMapper _mapper;
 
-    public class UpdateTechnologyCommandHandler : IRequestHandler<UpdateTechnologyCommand, UpdateTechnologyCommandResponseDto>
+    public UpdateTechnologyCommandHandler(ITechnologyRepository technologyRepository, TechnologyBusinessRules businessRules, IMapper mapper)
     {
-        private readonly ITechnologyRepository _technologyRepository;
-        private readonly TechnologyBusinessRules _rules;
-        private readonly IMapper _mapper;
+        _technologyRepository = technologyRepository;
+        _businessRules = businessRules;
+        _mapper = mapper;
+    }
 
-        public UpdateTechnologyCommandHandler(ITechnologyRepository technologyRepository, TechnologyBusinessRules rules, IMapper mapper)
-        {
-            _technologyRepository = technologyRepository;
-            _rules = rules;
-            _mapper = mapper;
-        }
+    public async Task<UpdateTechnologyCommandResponseDto> Handle(UpdateTechnologyCommand request, CancellationToken cancellationToken)
+    {
+        Technology? technology = await _technologyRepository.GetAsync(t => t.Id == request.Technology.Id);
 
-        public async Task<UpdateTechnologyCommandResponseDto> Handle(UpdateTechnologyCommand request, CancellationToken cancellationToken)
-        {
-            Technology? technology = await _technologyRepository.GetAsync(t => t.Id == request.Technology.Id);
-           
-            _rules.NullCheck(technology);
-            await _rules.TechnologyNameCanNotBeDuplicated(request.Technology.Name);
+        _businessRules.NullCheck(technology);
+        await _businessRules.TechnologyNameCanNotBeDuplicated(request.Technology.Name);
 
-            Technology mappedTechnology = _mapper.Map(request.Technology, technology);
-            await _technologyRepository.UpdateAsync(mappedTechnology);
+        technology = _mapper.Map(request.Technology, technology);
+        await _technologyRepository.UpdateAsync(technology);
 
-            return _mapper.Map<UpdateTechnologyCommandResponseDto>(mappedTechnology);
-        }
+        return _mapper.Map<UpdateTechnologyCommandResponseDto>(technology);
     }
 }

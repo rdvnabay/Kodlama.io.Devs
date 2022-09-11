@@ -1,7 +1,8 @@
 ﻿using Application.Services.Repositories;
+using Core.Application.BusinessRules;
 namespace Application.Features.Technologies;
 
-public class TechnologyBusinessRules
+public class TechnologyBusinessRules : GlobalBusinessRules
 {
     private readonly ITechnologyRepository _technologyRepository;
 
@@ -12,9 +13,7 @@ public class TechnologyBusinessRules
 
     public async Task TechnologyNameCanNotBeDuplicated(string name)
     {
-        var recordExists = await _technologyRepository.AnyAsync(t => t.Name == name);
-        if (recordExists) throw new BusinessException("Technology name exists");
+        if (await _technologyRepository.AnyAsync(t => t.Name == name))
+            throw new BusinessException("Technology name exists");
     }
-
-    public void NullCheck(Technology technology) => ArgumentNullException.ThrowIfNull(technology);
 }
