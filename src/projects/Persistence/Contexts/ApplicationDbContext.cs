@@ -1,5 +1,4 @@
-﻿using Core.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 namespace Persistence.Contexts;
@@ -14,7 +13,9 @@ public class ApplicationDbContext : DbContext
     protected IConfiguration Configuration { get; set; }
 
     //DbSets
+    public DbSet<Developer> Developers { get; set; }
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+    public DbSet<SocialMediaAccount> SocialMediaAccounts { get; set; }
     public DbSet<Technology> Technologies { get; set; }
 
     public DbSet<User> User { get; set; }
