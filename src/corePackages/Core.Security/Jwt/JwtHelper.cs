@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
+
 namespace Core.Security.Jwt;
 
 public class JwtHelper : ITokenHelper
@@ -35,17 +37,17 @@ public class JwtHelper : ITokenHelper
         };
     }
 
-    //public RefreshToken CreateRefreshToken(User user, string ipAddress)
-    //{
-    //    return new()
-    //    {
-    //        UserId = user.Id,
-    //        TokenContext = Convert.ToBase64String(RandomNumberGenerator.GetBytes((64)),
-    //        Expires = DateTime.UtcNow.AddDays(7),
-    //        Created = DateTime.UtcNow,
-    //        CreatedByIp = ipAddress
-    //   };
-    //}
+    public RefreshToken CreateRefreshToken(User user, string ipAddress)
+    {
+        return new()
+        {
+            UserId = user.Id,
+            Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes((64))),
+            Expires = DateTime.UtcNow.AddDays(7),
+            CreatedDate = DateTime.UtcNow,
+            CreatedByIp = ipAddress
+       };
+    }
 
     public JwtSecurityToken CreateJwtSecurityToken(User user, List<OperationClaim> operationClaims, SigningCredentials signingCredentials, TokenOptions tokenOptions)
     {
