@@ -1,6 +1,8 @@
-﻿namespace Core.Domain.Entities;
+﻿using Core.Domain.Entities.Base;
 
-public class UserOperationClaim
+namespace Core.Domain.Entities;
+
+public class UserOperationClaim:IEntity
 {
     public int UserId { get; set; }
     public int OperationClaimId { get; set; }
