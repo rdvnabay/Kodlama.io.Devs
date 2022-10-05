@@ -5,3 +5,4 @@ public class OperationClaimRepository : EfRepositoryBase<ApplicationDbContext, O
     public OperationClaimRepository(ApplicationDbContext context) : base(context) { }
 }
 
+
