@@ -12,10 +12,10 @@ public class GetLoginUserQueryHandler : IRequestHandler<GetLoginUserQuery, Acces
 {
     private readonly IUserRepository _userRepository;
     private readonly IOperationClaimRepository _operationClaimRepository;
-    private readonly UserBusinessRules _businessRules;
+    private readonly AuthBusinessRules _businessRules;
     private readonly ITokenHelper _tokenHelper;
 
-    public GetLoginUserQueryHandler(IUserRepository userRepository, UserBusinessRules businessRules, ITokenHelper tokenHelper, IOperationClaimRepository operationClaimRepository)
+    public GetLoginUserQueryHandler(IUserRepository userRepository, AuthBusinessRules businessRules, ITokenHelper tokenHelper, IOperationClaimRepository operationClaimRepository)
     {
         _userRepository = userRepository;
         _businessRules = businessRules;
