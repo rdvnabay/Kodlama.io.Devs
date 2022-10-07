@@ -13,9 +13,10 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ISocialMediaAccountRepository, SocialMediaAccountRepository>();
         services.AddScoped<ITechnologyRepository, TechnologyRepository>();
 
+        services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
-
+        services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
         return services;
     }
 }
