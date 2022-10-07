@@ -2,6 +2,7 @@
 using Application.Features.SocialMediaAccounts;
 using Application.Features.Technologies;
 using Application.Features.Users;
+using Application.Services.AuthService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,11 +17,14 @@ public static class ApplicationServiceRegistration
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
+        //Services
+        services.AddScoped<IAuthService, AuthService>();
+
         //Business Rules
         services.AddScoped<ProgrammingLanguageBusinessRules>();
         services.AddScoped<SocialMediaAccountBusinessRules>();
         services.AddScoped<TechnologyBusinessRules>();
-        services.AddScoped<UserBusinessRules>();
+        services.AddScoped<AuthBusinessRules>();
 
         //Behaviors
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
